@@ -78,7 +78,7 @@ def main():
                 heading = (heading + 1) % 4
             else:
                 current_coords = next
-            if total >= limit:
+            if total >= limit:  #could add much faster looping detection but I decided to simply use the worst case length for a walk and if I have visited more squares, then I must be looping.
                 # print("looping")
                 count += 1
                 break
