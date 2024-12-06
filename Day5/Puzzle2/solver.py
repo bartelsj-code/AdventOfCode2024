@@ -60,9 +60,6 @@ for order in orders:
         a = sorted(order, key=lambda x: vars[x].varValue, reverse=False)
         
         count += int(a[len(a)//2])
-            
-
-
         
     else:
         pass
