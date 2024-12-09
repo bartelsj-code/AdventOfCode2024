@@ -58,11 +58,4 @@ def main():
     antinodes = list(set(antinodes))
     print(len(antinodes))
 
-    # grid = [row[:] for row in input]
-
-    # for node in antinodes:
-    #     grid[node[1]][node[0]] = "#"
-
-    # display(grid)
-
 main()
