@@ -40,7 +40,7 @@ class Node:
             children = [Node(val, self.depth-1) for val in get_next(self.value)]
             values_dict[self.pair] = sum(child.get_pedigree_size() for child in children)
         return values_dict[self.pair]
-        
+    
 
 def main():
     #DPish (dynamic programming)-ish approach:
