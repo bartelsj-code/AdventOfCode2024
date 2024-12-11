@@ -8,44 +8,37 @@ def convert_input():
     f.close()
     return output
 
-#will store outcomes as (value, depth) : known pedigree size
-values_dict = {}
-
-
 def get_next(item):
+    #generates next version of stone
     if item == 0:
         return [1]
     strv = str(item)
     if len(strv)%2 == 0:
-
-        str1 = strv[:len(strv)//2]
-        str2 = strv[len(strv)//2:]
-        return [int(str1), int(str2)]
+        return [int(strv[:len(strv)//2]), int(strv[len(strv)//2:])]
     return [item * 2024]
 
+
+#will store pedigree size for nodes as (value, depth) : known pedigree size
+values_dict = {}
 
 
 class Node:
     def __init__(self, value, depth):
-        
-        self.children = []
         self.value = value
         self.depth = depth
         self.pair = (self.value, self.depth)
 
-    def __repr__(self):
-        return f"{self.value}|{self.depth}"
-
     def get_pedigree_size(self):
-        #if possible, simply get pedigree size from values_dict. Otherwise, combine pedigree sizes of children calculated with this function
+        #returns number of leaves in this nodes pedigree (children, grandchildren, etc)
         if self.pair in values_dict:
+            #if already known from previous instance, return that.
             return values_dict[self.pair]
+        # update values dict: 1 for a leaf, and sum of children (recursive) for non-leaf.
         if self.depth == 0:
             values_dict[self.pair] = 1
         else:
             children = [Node(val, self.depth-1) for val in get_next(self.value)]
-            s = sum(child.get_pedigree_size() for child in children)
-            values_dict[self.pair] = s
+            values_dict[self.pair] = sum(child.get_pedigree_size() for child in children)
         return values_dict[self.pair]
         
 

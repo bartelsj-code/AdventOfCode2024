@@ -25,8 +25,9 @@ def main():
     
     input = convert_input()
     current = input
-    for i in range(25):
-
+    print(input)
+    for i in range(5):
+        
         lst = []
         for item in current:
 
