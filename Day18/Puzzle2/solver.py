@@ -25,10 +25,6 @@ class Node:
     def __lt__(self, other):
         return self
 
-
-
-
-
 def main():
     scale = 70
     deltas = [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -38,8 +34,7 @@ def main():
     end_coords = (scale,scale)
     te = convert_input()
 
-    
-
+    #make grid
     grid = []
     for y in range(scale+1):
         line = []
@@ -47,11 +42,11 @@ def main():
             line.append(".")
         grid.append(line)
     
-
     for i in range(1024):
         x, y = te[i][0], te[i][1]
         grid[y][x] = "#"
 
+    #make nodes
     for y in range(scale+1):
         for x in range(scale+1):
             if grid[y][x] == ".":
@@ -67,20 +62,15 @@ def main():
     start_node = nodes[start_coords]
     end_nodes = nodes[end_coords]
 
-
-    for i in range(1024, 5000):
+    #brute force dykstras alg.
+    for i in range(1024, len(te)):
         drop = (te[i][0], te[i][1])
         broken = nodes[drop]
         for ne in broken.neighbors:
             ne.neighbors.remove(broken)
         nodes.pop(drop)
 
-        print(len(nodes))
-        
-
-
-
-        #pq
+        #dykstras alg
         pq = []
         heapq.heappush(pq, (0, start_node))
         distances = {nodes[node]: float('inf') for node in nodes}
@@ -109,7 +99,5 @@ def main():
         if distances[nodes[end_coords]] == float('inf'):
             print(drop)
             break
-        
-
 
 main()
