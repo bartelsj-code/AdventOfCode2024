@@ -96,13 +96,9 @@ def get_dict(pad, parent_dict = None, pbp = None):
                     coords[pad[y][x]] = coord
                     if pad[y][x] != " " and pad[new[1]][new[0]] != " ":
                         pair = (pad[y][x], pad[new[1]][new[0]])
-                        
                         d[(pad[y][x] ,pad[new[1]][new[0]])]=deltas[delta]
                         path = d[pair]
                         button_presses[pair] = pbp[(path[0], "A")]+pbp[("A", path[0])]
-                  
-
-
                         pairs.remove((pad[y][x], pad[new[1]][new[0]]))                            
                         found[pad[y][x]].append(pad[new[1]][new[0]])
 
