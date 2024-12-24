@@ -156,7 +156,7 @@ def get_dict(pad, parent_dict = None, pbp = None):
     return d, button_presses
 
 def main():
-    rooms = 25
+    rooms = 2
     total = 0
     puzzle_input = convert_puzzle_input()
     pad1 = [["7","8","9"],
