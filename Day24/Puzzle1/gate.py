@@ -12,6 +12,8 @@ class Gate:
         if i1.value != None and i2.value != None:
             self.function()
             self.done = True
+            return True
+        return False
 
 
 

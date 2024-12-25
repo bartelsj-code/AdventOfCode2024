@@ -24,10 +24,6 @@ def convert_input():
             f2 = g[1]
             gates.append((f, f2))
 
-
-        
-
-
     return wires, gates
 
 def main():
@@ -56,13 +52,21 @@ def main():
 
         gates.append(gd[n[0][1]]((wires[in1], wires[in2]), wires[out]))
     
-    
-    
-    for i in range(100):
+    zwires = []
+    zs = set()
+    for w in wires:
+        if w[0] == "z":
+            zwires.append(w)
+            zs.add(w)
+
+    while len(zs) != 0:
+
         for gate in gates:
             if not gate.done:
-                gate.execute()
-
+                if gate.execute():
+                    if gate.output.name in zs:
+                        zs.remove(gate.output.name)
+             
     zwires = []
     
     for w in wires:
@@ -78,12 +82,7 @@ def main():
         f = '1' if wires[n].value else '0'
         s+=f
 
-    for wire in wires:
-        print(wires[wire])
-
     print(int(s, 2))
-
-
 main()
 
 
